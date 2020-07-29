@@ -5,16 +5,14 @@ public class ChanLe implements Runnable{
     public static void main(String[] args) {
         ChanLe chanle = new ChanLe("le", 300);
         OddThread threadLe = new OddThread(chanle);
-        EvenThread threadChan = new EvenThread(chanle);
-        threadLe.start();
-        try{
-            threadLe.join();
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-            System.out.println("loi");
-        }
+        OddThread threadChan = new OddThread(chanle);
+
+        threadLe.setPriority(1);
+        threadChan.setPriority(3);
+
         threadChan.start();
+        threadLe.start();
+
     }
 
 
@@ -28,9 +26,9 @@ public class ChanLe implements Runnable{
         this.print();
     }
 
-    public void print()  {
+    public synchronized void print()  {
         for(int i=1;i<=10;i++){
-            System.out.println("thread "+this.name+" " +i+" "+Thread.currentThread());
+            System.out.println(i+" "+Thread.currentThread());
             try {
                 Thread.sleep(300);
             }catch(InterruptedException e){
@@ -52,8 +50,8 @@ public class ChanLe implements Runnable{
         this.delay=obj.delay;
     }
     @Override
-    public synchronized void run() {
-        this.obj.run();
+    public void run(){
+        obj.run();
     }
 }
 
@@ -69,7 +67,7 @@ public class ChanLe implements Runnable{
     }
 
     @Override
-    public synchronized void run() {
-        this.obj.print();
+    public void run() {
+        this.obj.run();
     }
 }
