@@ -8,7 +8,13 @@ public class ChanLe implements Runnable{
        OddThread threadLe=new OddThread(le);
        EvenThread threadChan=new EvenThread(chan);
        threadLe.start();
-       threadLe.join();
+//       try{
+//           threadLe.join();
+//       }
+//       catch (InterruptedException e){
+//           e.printStackTrace();
+//           System.out.println("loi");
+//       }
        threadChan.start();
 
 
@@ -20,13 +26,13 @@ public class ChanLe implements Runnable{
     }
 
     @Override
-    public void run(){
+    synchronized public void run(){
         this.print();
     }
     synchronized public void print() {
         try {
             for(int i=1;i<=10;i++){
-                System.out.println("thread "+this.name+" " +i+" "+this.hashCode());
+                System.out.println("thread "+this.name+" " +i+" "+Thread.currentThread());
                 Thread.sleep(this.delay);
             }
         } catch (InterruptedException e) {

@@ -36,7 +36,7 @@ class MyThread2 extends Thread {
 class Table {
     synchronized void printTable(int n) {// method synchronized
         for (int i = 1; i <= 5; i++) {
-            System.out.println(n * i);
+            System.out.println(n * i+" "+Thread.currentThread());
             try {
                 Thread.sleep(300);
             } catch (Exception e) {
