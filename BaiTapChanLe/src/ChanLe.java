@@ -26,14 +26,14 @@ public class ChanLe implements Runnable{
     }
 
     @Override
-    synchronized public void run(){
+    public synchronized void run(){
         this.print();
     }
-    synchronized public void print() {
+    public synchronized void print() {
         try {
             for(int i=1;i<=10;i++){
                 System.out.println("thread "+this.name+" " +i+" "+Thread.currentThread());
-                Thread.sleep(this.delay);
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class ChanLe implements Runnable{
         this.delay=obj.delay;
     }
     @Override
-    synchronized public void run() {
+    public synchronized void run() {
         this.obj.print();
     }
 }
@@ -69,7 +69,7 @@ public class ChanLe implements Runnable{
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         this.obj.print();
     }
 }
