@@ -9,9 +9,9 @@ public class ChanLe implements Runnable{
 
         threadLe.setPriority(1);
         threadChan.setPriority(3);
-
-        threadChan.start();
         threadLe.start();
+        threadChan.start();
+
 
     }
 
@@ -26,7 +26,7 @@ public class ChanLe implements Runnable{
         this.print();
     }
 
-    public synchronized void print()  {
+    public void print()  {
         for(int i=1;i<=10;i++){
             System.out.println(i+" "+Thread.currentThread());
             try {
@@ -51,7 +51,7 @@ public class ChanLe implements Runnable{
     }
     @Override
     public void run(){
-        obj.run();
+        obj.print();
     }
 }
 
