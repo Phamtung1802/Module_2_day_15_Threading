@@ -9,6 +9,7 @@ public class NumberGenerator implements Runnable {
     public void run(){
         this.print();
     }
+
     synchronized public void print() {
         try {
             for(int i=0;i<10;i++){
