@@ -11,9 +11,12 @@ public class TestSynchronization1 {
 
 class MyThread1 extends Thread {
     Table t;
+    int delay;
 
     MyThread1(Table t) {
         this.t = t;
+        this.delay=t.delay;
+
     }
 
     public void run() {
@@ -34,11 +37,12 @@ class MyThread2 extends Thread {
 }
 
 class Table {
+    int delay;
     synchronized void printTable(int n) {// method synchronized
         for (int i = 1; i <= 5; i++) {
             System.out.println(n * i+" "+Thread.currentThread());
             try {
-                Thread.sleep(300);
+                Thread.sleep(this.delay);
             } catch (Exception e) {
                 System.out.println(e);
             }

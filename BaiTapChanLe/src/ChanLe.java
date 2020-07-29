@@ -2,23 +2,21 @@ public class ChanLe implements Runnable{
     public String name;
     public int delay;
 
-    public static void main(String[] args) throws InterruptedException {
-       ChanLe chan=new ChanLe("chan",150);
-       ChanLe le=new ChanLe("le",300);
-       OddThread threadLe=new OddThread(le);
-       EvenThread threadChan=new EvenThread(chan);
-       threadLe.start();
-       try{
-           threadLe.join();
-       }
-       catch (InterruptedException e){
-           e.printStackTrace();
-           System.out.println("loi");
-       }
-       threadChan.start();
-
-
+    public static void main(String[] args) {
+        ChanLe chanle = new ChanLe("le", 300);
+        OddThread threadLe = new OddThread(chanle);
+        EvenThread threadChan = new EvenThread(chanle);
+        threadLe.start();
+        try{
+            threadLe.join();
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+            System.out.println("loi");
+        }
+        threadChan.start();
     }
+
 
     public ChanLe(String name,int delay) {
         this.name = name;
@@ -26,21 +24,23 @@ public class ChanLe implements Runnable{
     }
 
     @Override
-    public synchronized void run(){
+    public void run(){
         this.print();
     }
-    public synchronized void print() {
-        try {
-            for(int i=1;i<=10;i++){
-                System.out.println("thread "+this.name+" " +i+" "+Thread.currentThread());
-                Thread.sleep(100);
+
+    public void print()  {
+        for(int i=1;i<=10;i++){
+            System.out.println("thread "+this.name+" " +i+" "+Thread.currentThread());
+            try {
+                Thread.sleep(300);
+            }catch(InterruptedException e){
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
 }
+
  class OddThread extends Thread{
     private String name;
     ChanLe obj;
@@ -53,7 +53,7 @@ public class ChanLe implements Runnable{
     }
     @Override
     public synchronized void run() {
-        this.obj.print();
+        this.obj.run();
     }
 }
 
