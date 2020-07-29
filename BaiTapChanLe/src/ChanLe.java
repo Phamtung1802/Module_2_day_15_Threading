@@ -8,13 +8,13 @@ public class ChanLe implements Runnable{
        OddThread threadLe=new OddThread(le);
        EvenThread threadChan=new EvenThread(chan);
        threadLe.start();
-//       try{
-//           threadLe.join();
-//       }
-//       catch (InterruptedException e){
-//           e.printStackTrace();
-//           System.out.println("loi");
-//       }
+       try{
+           threadLe.join();
+       }
+       catch (InterruptedException e){
+           e.printStackTrace();
+           System.out.println("loi");
+       }
        threadChan.start();
 
 
